@@ -6,30 +6,9 @@ This project focuses on solving the Traveling Salesman Problem (TSP) with time w
 
 The TSP with time windows involves finding the shortest path that visits a set of cities while respecting the specified time windows for each city. The problem is defined by:
 
-- **Cities:**
-  
-  | A | B | C | D | E | F | G | H |
-  |---|---|---|---|---|---|---|---|
-
-- **Distances (Costs) Matrix:**
-  
-  |   | A | B | C | D | E | F | G | H |
-  |---|---|---|---|---|---|---|---|---|
-  | A | X | 1 | 8 | 9 | 3 | 2 | 4 | 6 |
-  | B | 1 | X | 7 | 4 | 1 | 3 | 9 | 2 |
-  | C | 8 | 7 | X | 6 | 8 | 2 | 4 | 5 |
-  | D | 9 | 4 | 6 | X | 9 | 3 | 1 | 1 |
-  | E | 3 | 1 | 8 | 9 | X | 4 | 2 | 7 |
-  | F | 2 | 3 | 2 | 3 | 4 | X | 6 | 3 |
-  | G | 4 | 9 | 4 | 1 | 2 | 6 | X | 5 |
-  | H | 6 | 2 | 5 | 1 | 7 | 3 | 5 | X |
-
-- **Time Windows:**
-  
-  |     | A   | B  | C  | D  | E  | F  | G  | H  |
-  |-----|-----|----|----|----|----|----|----|----|
-  | Min | 0   | 3  | 32 | 15 | 3  | 6  | 25 | 50 |
-  | Max | 100 | 12 | 40 | 24 | 6  | 10 | 30 | 52 |
+<p align="center">
+   <img src="images/problem_to_solve.png" width="100%" />
+</p>
 
 ## Solution Approaches
 
