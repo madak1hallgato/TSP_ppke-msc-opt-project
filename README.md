@@ -1,13 +1,16 @@
 # Traveling Salesman Problem with Time Windows
 
-This project aims to solve the Traveling Salesman Problem (TSP) with time windows using both brute force and genetic algorithm approaches.
+This project focuses on solving the Traveling Salesman Problem (TSP) with time windows using both brute force and genetic algorithm approaches.
 
-## Problem Description
+## Problem Overview
 
-The TSP with time windows involves finding the shortest route that visits a set of cities while respecting the specified time windows for each city. The problem is defined by:
+The TSP with time windows involves finding the shortest path that visits a set of cities while respecting the specified time windows for each city. The problem is defined by:
 
-- **Cities:** A, B, C, D, E, F, G, H
-- **Start City:** A
+- **Cities:**
+  
+  | A | B | C | D | E | F | G | H |
+  |---|---|---|---|---|---|---|---|
+
 - **Distances (Costs) Matrix:**
   
   |   | A | B | C | D | E | F | G | H |
@@ -30,6 +33,14 @@ The TSP with time windows involves finding the shortest route that visits a set 
 
 ## Solution Approaches
 
+The following figure illustrates a path (far from optimal) to demonstrate the calculation of costs.
+
+<p align="center">
+   <img src="images/example_path.png" width="100%" />
+</p>
+
+In the path, you can observe the time window constraints beneath each city, along with the time taken to travel between them. The red nodes indicate cities where the time constraints are violated, incurring penalties.
+
 ### Brute Force
 
 The brute force approach evaluates all possible permutations of the cities and selects the path with the minimum total cost. The following strategies are employed:
@@ -46,15 +57,25 @@ The genetic algorithm approach employs evolutionary principles to find an optima
 2. **Minimize Penalty:** Applies genetic operations to minimize the penalty.
 3. **Minimize Total Cost with Penalty:** Considers both total cost and penalty in the evolution process.
 
-### Genetic Algorithm Steps
+### Genetic Algorithm Workflow
 
-1. **Population Creation:** A population of candidate solutions is created by randomly shuffling the order of cities. Each individual represents a potential solution to the TSP with time windows problem.
-2. **Fitness Calculation:** The fitness of each individual is calculated based on its ability to minimize the total cost and penalty. The fitness function considers both the total cost of the tour and the penalty incurred due to time window violations.
-3. **Parent Selection:**  Individuals from the population are selected as parents for the next generation. The selection is typically biased towards fitter individuals to promote better solutions.
-4. **Crossover Operation:** Partially Matched Crossover (PMX) is employed to recombine pairs of parents and generate offspring. PMX is a widely used crossover technique for TSP problems that preserves the relative order of elements in the parent chromosomes while creating diverse offspring.
-5. **Mutation Operation:** Mutation is applied to introduce randomness and explore new regions of the solution space. Each individual has a certain probability of undergoing mutation, where two random cities are swapped within the tour.
-6. **Survivor Selection:** Elitism is employed to preserve the best solutions from the previous generation. The offspring population replaces the old population, with a portion of the best individuals (elite) carried over to the next generation unchanged.
-7. **Stopping Criterion:** The algorithm terminates after a fixed number of generations, as defined by the parameter generations.
+1. **Population Creation:** Randomly shuffles city orders to create a population of candidate solutions.
+2. **Fitness Calculation:** Evaluates fitness based on minimizing total cost and penalty.
+3. **Parent Selection:** Choosing individuals that are more fit to encourage better solutions.
+4. **Crossover Operation:** Utilizes Partially Matched Crossover (PMX) to generate offspring.
+5. **Mutation Operation:** Introduces randomness by swapping two random cities within a path.
+6. **Survivor Selection:** Preserves the best solutions from the previous generation using elitism.
+7. **Stopping Criterion:** Terminates after a fixed number of generations.
+
+### Feasible Paths
+
+In the Traveling Salesman Problem with time windows (TSP-TW), the objective is to find an optimal route for visiting a set of cities, following to predefined time windows for each city. A feasible path in the TSP-TW context refers to a route that satisfies all time constraints while visiting each city exactly once, starting and ending at a designated origin city.
+
+<p align="center">
+   <img src="images/feasible_solution.png" width="100%" />
+</p>
+
+No feasible paths exist in the given problem without modifying time window constraints. The faint line at the top shows an example of the solution with modified time window constraints.
 
 ## Running the Code
 
@@ -64,6 +85,41 @@ To run the code, execute the `main.py` file. It will output the results obtained
 python main.py
 ```
 
-## Results
+## Results (Output)
 
-The results include the optimal paths obtained from each approach along with their respective penalties and costs. The paths are displayed in the order of cities visited.
+The results display optimal paths from each approach along with their penalties and costs, displaying the order of visited cities.
+
+```text
+Is there a feasible solution to the problem?
+No feasible solution exists.
+
+Brute Force Approach (without Time Window):
+Path: A -> B -> E -> G -> D -> H -> C -> F -> A
+Penalty: 7
+Cost: 15
+
+Brute Force Approach (minimize the Penalty):
+Path: A -> E -> F -> H -> B -> D -> C -> G -> A
+Penalty: 2
+Cost: 30
+
+Brute Force Approach (minimize the Cost):
+Path: A -> E -> B -> H -> D -> G -> C -> F -> A
+Penalty: 5
+Cost: 21(16+5)
+
+Genetic Algorithm Approach (without Time Window):
+Path: A -> F -> C -> H -> D -> G -> E -> B -> A
+Penalty: 7
+Cost: 15
+
+Genetic Algorithm Approach (minimize the Penalty):
+Path: A -> E -> F -> H -> B -> D -> C -> G -> A
+Penalty: 2
+Cost: 30
+
+Genetic Algorithm Approach (minimize the Cost):
+Path: A -> E -> B -> H -> D -> G -> C -> F -> A
+Penalty: 5
+Cost: 21(16+5)
+```
