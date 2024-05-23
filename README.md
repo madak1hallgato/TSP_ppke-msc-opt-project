@@ -82,38 +82,51 @@ python main.py
 The results display optimal paths from each approach along with their penalties and costs, displaying the order of visited cities.
 
 ```text
-Is there a feasible solution to the problem?
+(1) - Is there any feasible solution to the problem?
+
 No feasible solution exists.
 
-Brute Force Approach (without Time Window):
+(+) - Minimize Time (without Time Window)
+
+Brute Force:
 Path: A -> B -> E -> G -> D -> H -> C -> F -> A
-Penalty: 7
-Cost: 15
+Time: 15
+(Penalty: 7)
+(Cost: 22)
 
-Brute Force Approach (minimize the Penalty):
-Path: A -> E -> F -> H -> B -> D -> C -> G -> A
-Penalty: 2
-Cost: 30
-
-Brute Force Approach (minimize the Cost):
-Path: A -> E -> B -> H -> D -> G -> C -> F -> A
-Penalty: 5
-Cost: 21(16+5)
-
-Genetic Algorithm Approach (without Time Window):
+Genetic Algorithm:
 Path: A -> F -> C -> H -> D -> G -> E -> B -> A
-Penalty: 7
-Cost: 15
+Time: 15
+(Penalty: 7)
+(Cost: 22)
 
-Genetic Algorithm Approach (minimize the Penalty):
+(2) - Minimize Penalty
+
+Brute Force:
 Path: A -> E -> F -> H -> B -> D -> C -> G -> A
+(Time: 30)
 Penalty: 2
-Cost: 30
+(Cost: 32)
 
-Genetic Algorithm Approach (minimize the Cost):
+Genetic Algorithm:
+Path: A -> E -> F -> H -> B -> D -> C -> G -> A
+(Time: 30)
+Penalty: 2
+(Cost: 32)
+
+(3) - Minimize Cost (Time+Penalty)
+
+Brute Force:
 Path: A -> E -> B -> H -> D -> G -> C -> F -> A
-Penalty: 5
-Cost: 21(16+5)
+(Time: 16)
+(Penalty: 5)
+Cost: 21
+
+Genetic Algorithm:
+Path: A -> E -> B -> H -> D -> G -> C -> F -> A
+(Time: 16)
+(Penalty: 5)
+Cost: 21
 ```
 
 For this result, the following parameters was applied:

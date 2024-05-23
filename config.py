@@ -32,7 +32,7 @@ penalty_per_city = 1
 
 # GA Settings
 
-pop_size = 300
+population_size = 300
 elite_size = 20
 mutation_rate = 0.01
 generations = 300

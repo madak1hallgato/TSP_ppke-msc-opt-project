@@ -1,7 +1,7 @@
 
 from config import cost_matrix, time_windows, penalty_per_city
 
-def calculate_cost(path):
+def calculate_time(path):
     cost = 0
     for path_idx in range(len(path) - 1):
         cost += cost_matrix[path[path_idx]][path[path_idx + 1]]
@@ -11,7 +11,7 @@ def calculate_penalty(path):
     penalty = 0
     for i in range(len(path)):
         min_time, max_time = time_windows[path[i]]
-        arrival_time = calculate_cost(path[0:i+1])
+        arrival_time = calculate_time(path[0:i+1])
         if arrival_time < min_time or arrival_time > max_time:
             penalty += penalty_per_city
     return penalty

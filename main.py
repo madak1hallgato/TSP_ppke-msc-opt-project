@@ -1,34 +1,29 @@
 
-from config import city_labels
 from calculations import has_feasible_solution
-from brute_force import brute_force_tsp_1, brute_force_tsp_2, brute_force_tsp_3
-from genetic_algorithm import genetic_algorithm_tsp_1, genetic_algorithm_tsp_2, genetic_algorithm_tsp_3
+from brute_force import BruteForce
+from genetic_algorithm import GeneticAlgorithm
 
-# Check if there is a feasible solution
-print("\nIs there a feasible solution to the problem?")
+bf = BruteForce()
+ga = GeneticAlgorithm()
+
+print("\n(1) - Is there any feasible solution to the problem?\n")
 if has_feasible_solution(): print("Yes, there is a feasible solution to the problem.")
 else: print("No feasible solution exists.")
 
-# Get the results from the approaches
-brute_force_path_1, brute_force_penalty_1, brute_force_cost_1 = brute_force_tsp_1()
-brute_force_path_2, brute_force_penalty_2, brute_force_cost_2 = brute_force_tsp_2()
-brute_force_path_3, brute_force_penalty_3, brute_force_cost_3 = brute_force_tsp_3()
-genetic_algorithm_path_1, genetic_algorithm_penalty_1, genetic_algorithm_cost_1 = genetic_algorithm_tsp_1()
-genetic_algorithm_path_2, genetic_algorithm_penalty_2, genetic_algorithm_cost_2 = genetic_algorithm_tsp_2()
-genetic_algorithm_path_3, genetic_algorithm_penalty_3, genetic_algorithm_cost_3 = genetic_algorithm_tsp_3()
+print("\n(+) - Minimize Time (without Time Window)")
+bf_t = bf.minimize_time()
+print(f"\nBrute Force:\nPath: {' -> '.join(bf_t['path'])}\nTime: {bf_t['time']}\n(Penalty: {bf_t['penalty']})\n(Cost: {bf_t['cost']})")
+ga_t = ga.minimize_time()
+print(f"\nGenetic Algorithm:\nPath: {' -> '.join(ga_t['path'])}\nTime: {ga_t['time']}\n(Penalty: {ga_t['penalty']})\n(Cost: {ga_t['cost']})")
 
-# Convert path indices back to city labels for display
-brute_force_path_1 = [city_labels[i] for i in brute_force_path_1]
-brute_force_path_2 = [city_labels[i] for i in brute_force_path_2]
-brute_force_path_3 = [city_labels[i] for i in brute_force_path_3]
-genetic_algorithm_path_labels_1 = [city_labels[city] for city in genetic_algorithm_path_1]
-genetic_algorithm_path_labels_2 = [city_labels[city] for city in genetic_algorithm_path_2]
-genetic_algorithm_path_labels_3 = [city_labels[city] for city in genetic_algorithm_path_3]
+print("\n(2) - Minimize Penalty")
+bf_p = bf.minimize_penalty()
+print(f"\nBrute Force:\nPath: {' -> '.join(bf_p['path'])}\n(Time: {bf_p['time']})\nPenalty: {bf_p['penalty']}\n(Cost: {bf_p['cost']})")
+ga_p = ga.minimize_penalty()
+print(f"\nGenetic Algorithm:\nPath: {' -> '.join(ga_p['path'])}\n(Time: {ga_p['time']})\nPenalty: {ga_p['penalty']}\n(Cost: {ga_p['cost']})")
 
-# Print results
-print(f"\nBrute Force Approach (without Time Window):\nPath: {' -> '.join(brute_force_path_1)}\nPenalty: {brute_force_penalty_1}\nCost: {brute_force_cost_1}")
-print(f"\nBrute Force Approach (minimize the Penalty):\nPath: {' -> '.join(brute_force_path_2)}\nPenalty: {brute_force_penalty_2}\nCost: {brute_force_cost_2}")
-print(f"\nBrute Force Approach (minimize the Cost):\nPath: {' -> '.join(brute_force_path_3)}\nPenalty: {brute_force_penalty_3}\nCost: {brute_force_cost_3}({brute_force_cost_3-brute_force_penalty_3}+{brute_force_penalty_3})")
-print(f"\nGenetic Algorithm Approach (without Time Window):\nPath: {' -> '.join(genetic_algorithm_path_labels_1)}\nPenalty: {genetic_algorithm_penalty_1}\nCost: {genetic_algorithm_cost_1}")
-print(f"\nGenetic Algorithm Approach (minimize the Penalty):\nPath: {' -> '.join(genetic_algorithm_path_labels_2)}\nPenalty: {genetic_algorithm_penalty_2}\nCost: {genetic_algorithm_cost_2}")
-print(f"\nGenetic Algorithm Approach (minimize the Cost):\nPath: {' -> '.join(genetic_algorithm_path_labels_3)}\nPenalty: {genetic_algorithm_penalty_3}\nCost: {genetic_algorithm_cost_3}({genetic_algorithm_cost_3-genetic_algorithm_penalty_3}+{genetic_algorithm_penalty_3})\n")
+print("\n(3) - Minimize Cost (Time+Penalty)")
+bf_c = bf.minimize_cost()
+print(f"\nBrute Force:\nPath: {' -> '.join(bf_c['path'])}\n(Time: {bf_c['time']})\n(Penalty: {bf_c['penalty']})\nCost: {bf_c['cost']}")
+ga_c = ga.minimize_cost()
+print(f"\nGenetic Algorithm:\nPath: {' -> '.join(ga_c['path'])}\n(Time: {ga_c['time']})\n(Penalty: {ga_c['penalty']})\nCost: {ga_c['cost']}\n")

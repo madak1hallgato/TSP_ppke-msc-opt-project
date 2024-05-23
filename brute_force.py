@@ -1,48 +1,45 @@
+
 import itertools
-from config import cities, start_city
-from calculations import calculate_cost, calculate_penalty
+from typing import Callable
+from config import cities, start_city, city_labels
+from calculations import calculate_time, calculate_penalty
 
-def brute_force_tsp_1():
-    permutations = itertools.permutations(cities)
-    min_penalty = float('inf')
-    min_cost = float('inf')
-    best_path = None
-    for perm in permutations:
-        path = [start_city] + list(perm) + [start_city]
-        penalty = calculate_penalty(path)
-        cost = calculate_cost(path)
-        if cost < min_cost:
-            min_penalty = penalty
-            min_cost = cost
-            best_path = path
-    return best_path, min_penalty, min_cost
+class BruteForce:
 
-def brute_force_tsp_2():
-    permutations = itertools.permutations(cities)
-    min_penalty = float('inf')
-    min_cost = float('inf')
-    best_path = None
-    for perm in permutations:
-        path = [start_city] + list(perm) + [start_city]
-        penalty = calculate_penalty(path)
-        cost = calculate_cost(path)
-        if penalty < min_penalty or (penalty == min_penalty and cost < min_cost):
-            min_penalty = penalty
-            min_cost = cost
-            best_path = path
-    return best_path, min_penalty, min_cost
+    def __init__(self) -> None:
+        self.reset_values()
 
-def brute_force_tsp_3():
-    permutations = itertools.permutations(cities)
-    min_penalty = float('inf')
-    min_cost = float('inf')
-    best_path = None
-    for perm in permutations:
-        path = [start_city] + list(perm) + [start_city]
-        penalty = calculate_penalty(path)
-        cost = calculate_cost(path) + penalty
-        if cost < min_cost:
-            min_penalty = penalty
-            min_cost = cost
-            best_path = path
-    return best_path, min_penalty, min_cost
+    def reset_values(self) -> None:
+        self.permutations = itertools.permutations(cities)
+        self.min_time = float('inf')
+        self.min_penalty = float('inf')
+        self.min_cost = float('inf')
+        self.best_path = None
+
+    def update_values(self) -> None:
+        self.min_time = self.time
+        self.min_penalty = self.penalty
+        self.min_cost = self.cost
+        self.best_path = self.path
+
+    def solve(self, new_best_solution: Callable) -> dict:
+        for perm in self.permutations:
+            self.path = [start_city] + list(perm) + [start_city]
+            self.time = calculate_time(self.path)
+            self.penalty = calculate_penalty(self.path)
+            self.cost = self.time + self.penalty
+            if new_best_solution(): self.update_values()
+        self.best_path = [city_labels[i] for i in self.best_path]
+        result = {'path':self.best_path,'time':self.min_time,'penalty':self.min_penalty,'cost':self.min_cost }
+        self.reset_values()
+        return result
+
+    def new_min_time(self) -> bool: return self.time < self.min_time
+    def minimize_time(self) -> dict: return self.solve(lambda:self.new_min_time())
+
+    def new_min_penalty(self) -> bool: return self.penalty < self.min_penalty or (self.penalty == self.min_penalty and self.time < self.min_time)
+    def minimize_penalty(self) -> dict: return self.solve(lambda:self.new_min_penalty())
+
+    def new_min_cost(self) -> bool: return self.cost < self.min_cost
+    def minimize_cost(self) -> dict: return self.solve(lambda:self.new_min_cost())
+        
