@@ -49,6 +49,10 @@ We approach the TSP-TW problem through two distinct methods, brute force and gen
 
 ### Genetic Algorithm Workflow
 
+<p align="center">
+   <img src="images/ga_pipeline.png" width="100%" />
+</p>
+
 #### 1. Initialization
 The algorithm begins by initializing various parameters and creating an initial population of potential solutions:
 - **Parameters**: `population_size`, `generations`, `mutation_rate`, and `elite_size` are set based on configuration.
