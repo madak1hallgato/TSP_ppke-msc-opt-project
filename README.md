@@ -47,15 +47,49 @@ We approach the TSP-TW problem through two distinct methods, brute force and gen
 
 - **Genetic Algorithm:** <br/> The genetic algorithm approach employs evolutionary principles to find an optimal solution. It evolves a population of candidate solutions over multiple generations.
 
-### Genetic Algorithm Workflow (TODO)
+### Genetic Algorithm Workflow
 
-1. **Population Creation:** Randomly shuffles city orders to create a population of candidate solutions.
-2. **Fitness Calculation:** Evaluates fitness based on minimizing total cost and penalty.
-3. **Parent Selection:** Choosing individuals that are more fit to encourage better solutions.
-4. **Crossover Operation:** Utilizes Partially Matched Crossover (PMX) to generate offspring.
-5. **Mutation Operation:** Introduces randomness by swapping two random cities within a path.
-6. **Survivor Selection:** Preserves the best solutions from the previous generation using elitism.
-7. **Stopping Criterion:** Terminates after a fixed number of generations.
+#### 1. Initialization
+The algorithm begins by initializing various parameters and creating an initial population of potential solutions:
+- **Parameters**: `population_size`, `generations`, `mutation_rate`, and `elite_size` are set based on configuration.
+- **Population**: An initial population of individuals (paths) is created by randomly shuffling the list of cities.
+
+#### 2. Fitness Calculation
+For each individual in the population, the fitness is calculated. The fitness can be based on:
+- **Time**: The total travel time for the path.
+- **Penalty**: The total number of violated time constraints 
+- **Cost**: A combination of time and penalty.
+
+#### 3. Elitism
+A portion of the best-performing individuals (elites) from the current generation is carried over to the next generation without modification:
+- **Elite Selection**: The top `elite_size` individuals based on fitness are selected.
+
+#### 4. Selection
+The algorithm selects individuals from the population to serve as parents for the next generation:
+- **Selection Method**: Individuals are chosen based on their fitness, with a higher chance of selecting individuals with better fitness scores (lower time, penalty, or cost).
+
+#### 5. Crossover
+The algorithm performs crossover between pairs of parents to generate offspring:
+- **Gene Selection**: A segment of genes (cities) is selected from one parent, and the remaining genes are taken from the other parent, ensuring no duplicates.
+- **Children Generation**: Two children are produced from each pair of parents.
+
+#### 6. Mutation
+The algorithm applies mutation to the offspring to maintain genetic diversity:
+- **Mutation Rate**: Each gene (city) in the individual has a chance to be swapped with another gene.
+- **Mutation Operation**: If a mutation occurs, two cities in the path are swapped.
+
+#### 7. New Generation
+The new generation is formed by combining the elite individuals and the mutated offspring:
+- **Population Update**: The current population is replaced by the new population.
+
+#### 8. Iteration
+Steps 2 to 7 are repeated for a predefined number of generations:
+- **Generational Loop**: The algorithm iterates over multiple generations, continually improving the population's fitness.
+
+#### 9. Solution Extraction
+After the final generation, the best individual (path) is selected as the solution:
+- **Best Individual**: The individual with the best fitness score (minimum time, penalty, or cost) is identified.
+- **Path Translation**: The indices of the cities in the path are translated to city labels.
 
 ## Feasible path for the Problem
 
