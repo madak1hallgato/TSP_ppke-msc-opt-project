@@ -73,10 +73,20 @@ The algorithm performs crossover between pairs of parents to generate offspring:
 - **Gene Selection**: A segment of genes (cities) is selected from one parent, and the remaining genes are taken from the other parent, ensuring no duplicates.
 - **Children Generation**: Two children are produced from each pair of parents.
 
+
+<p align="center">
+   <img src="images/ga_crossover.png" width="100%" />
+</p>
+
 #### 6. Mutation
 The algorithm applies mutation to the offspring to maintain genetic diversity:
 - **Mutation Rate**: Each gene (city) in the individual has a chance to be swapped with another gene.
 - **Mutation Operation**: If a mutation occurs, two cities in the path are swapped.
+
+
+<p align="center">
+   <img src="images/ga_mutation.png" width="100%" />
+</p>
 
 #### 7. New Generation
 The new generation is formed by combining the elite individuals and the mutated offspring:
