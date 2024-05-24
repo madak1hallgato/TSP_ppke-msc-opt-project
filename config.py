@@ -32,7 +32,8 @@ penalty_per_city = 1
 
 # GA Settings
 
-population_size = 300
-elite_size = 20
-mutation_rate = 0.01
 generations = 300
+population_size = 300
+mutation_rate = 0.01
+elite_size = 20
+

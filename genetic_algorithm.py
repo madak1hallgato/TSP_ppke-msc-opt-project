@@ -61,6 +61,7 @@ class GeneticAlgorithm:
             elite_individuals = [pop[i] for i in elite_indices]
             new_pop.extend(elite_individuals)
             parents = self.selection(pop, fitnesses, len(pop) - self.elite_size)
+            if len(parents) == 1: new_pop = parents
             for i in range(0, len(parents)-1, 2):
                 parent1 = parents[i]
                 parent2 = parents[i + 1]
