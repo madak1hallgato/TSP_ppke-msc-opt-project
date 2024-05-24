@@ -135,4 +135,17 @@ For this result, the following parameters was applied:
  - Mutation rate: 0.01
  - Generation: 300
 
-### Compare different variations (TODO)
+### Compare different variations
+
+Using the `test.py` file, the TSP was run 30 times for each parameter setting. The following table contains the GA setting and three numbers showing how many times GA and BF were equal for each minimization.
+
+|Generations|Populations|Mutation Rate|Elites|**\|**|Min Time|Min Penelty|Min Cost|
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| _10_| _10_|   _0_|  _0_|**\|**| 0| 0| 0|
+|_100_|_100_|   _0_|  _0_|**\|**| 0| 1| 0|
+|_100_|_100_|_0.01_| _10_|**\|**|30|30|22|
+|_100_|_100_|   _1_| _10_|**\|**|29|28|27|
+|_100_|_100_|_0.01_|_100_|**\|**| 2| 0| 0|
+|_300_|_100_|_0.01_| _20_|**\|**|28|30|24|
+|_100_|_300_|_0.01_| _20_|**\|**|30|30|29|
+|_300_|_300_|_0.01_| _20_|**\|**|30|30|30|
